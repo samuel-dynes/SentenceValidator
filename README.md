@@ -28,22 +28,43 @@ business/customer goals.
 To aid in this the IStringValidationRule interface was added to provide an interface which all rules must abide by, which allows the validator to take in any combination of different rules to allow for 
 different validation logic to take place, allowing for a more flexible solution that can address more customer/business use cases. There were many benefits that came from this but some include
 
-**Abstraction and Polymorphism**: By using this design, we abstract away the specific implementation details of each validation rule. This allows us to work with a common interface type, enabling polymorphism. we can treat different validation rules uniformly, making code more flexible and extensible.
+### **Abstraction and Polymorphism**: 
+By using this design, we abstract away the specific implementation details of each validation rule. This allows us to work with a common interface type, enabling polymorphism. we can treat different validation rules uniformly, making code more flexible and extensible.
 
-**Modularity**: This design promote modularity. Each validation rule is encapsulated within its own class, and these classes adhere to a common contract defined by the interface. This separation of concerns makes it easier to understand, maintain, and extend the code. We can easily add new validation rules by creating new classes that implement the interface without modifying existing code.
+### **Modularity**: 
+This design promotes modularity. Each validation rule is encapsulated within its own class, and these classes adhere to a common contract defined by the interface. This separation of concerns makes it easier to understand, maintain, and extend the code. We can easily add new validation rules by creating new classes that implement the interface without modifying existing code.
 
-**Loose Coupling**: This design results in loose coupling between components. The SentenceValidator doesn't need to know the specific details of each validation rule; it only relies on the IStringValidationRule interface. This reduces dependencies and makes the codebase more maintainable.
+### **Loose Coupling**: 
+This design results in loose coupling between components. The SentenceValidator doesn't need to know the specific details of each validation rule; it only relies on the IStringValidationRule interface. This reduces dependencies and makes the codebase more maintainable.
 
-**Testing**: With interfaces, we can easily create mock or stub implementations of the validation rules for testing purposes. This allows us to isolate and test each rule independently, ensuring they work correctly.
+### **Testing**: 
+With interfaces, we can easily create mock or stub implementations of the validation rules for testing purposes. This allows us to isolate and test each rule independently, ensuring they work correctly.
 
-**Clarity and Readability**: The use of interfaces makes the code more self-documenting. Developers can quickly understand the purpose and requirements of each validation rule by looking at the interface definition, then unbserstand the specific implementation details by looking at the implementor. This improves code readability and collaboration among team members.
+### **Clarity and Readability**: 
+The use of interfaces makes the code more self-documenting. Developers can quickly understand the purpose and requirements of each validation rule by looking at the interface definition, then unbserstand the specific implementation details by looking at the implementor. This improves code readability and collaboration among team members.
 
-**Extensibility**: When new validation rules are needed, we can create additional classes that implement the interface. This extensibility makes it straightforward to accommodate changing requirements without major code modifications.
+### **Extensibility**: 
+When new validation rules are needed, we can create additional classes that implement the interface. This extensibility makes it straightforward to accommodate changing requirements without major code modifications.
 
 ## CI
-Added a super basic CI workflow via github actions pretty much just ensures that everything compiles correctly and tests pass, would enforce a codeowners/minimum 1 review + force actions to pass before merging but locked behind enterprise accounts. WOuld also like to add a code coverage report as part of the CI via something like codecov but already used my trial, similar sentiment with code quality/static integration and sonarqube.
+Added a super basic CI workflow via GitHub actions pretty much just ensures that everything compiles correctly and tests pass, also added in a basic dependency analysis via OWASP Dependency-Check.
 
 ## "plug into software that ships to customers"
-I wasnt 100% sure what this meant but I sort of guessed at 2 main use cases:
-1. The code will be imported as a dependency to another product and the code will be implemented there. (In this case there isnt anythnig special that needs done, the classes are available for import and use)
-2. We need to intergrate in with some kind of existing microservice architecture, which is why there is a simple restAPI and spring application present so if needed this could get spun up for use among existing automation/services
+I wasn't 100% sure what this meant and if I was supposed to be working through the rest of the pipeline, or to create a basic REST API to serve this code, but the assumption I am running with is that the code will be imported as a dependency to another product and the code will be implemented there. (In this case there isn't anything special that needs done, the classes are available for import and use)
+
+## Areas of improvement/Expansion
+
+### 1. Improvements to CI:
+
+- Add in static code analysis: While I would like to add sonarqube to analyze for bad practice/smells I've already used my free trial, but I am an advocate for static code analysis in the CI/CD process
+- Improve dependency analysis: While OWASP's tool is a good start, id ideally wish to be using a more dedicated tool like snyk to make sure that the code I am importing isn't going to cause security issues
+
+### 2. Refine business-specific deployment:
+Was this to be imported into an existing project? If so the current method is okay, we likely just want to publish the packages for easy importing. However, if we are attempting to integrate into a microservice based system a REST wrapper for this should be developed, to be frank I didn't do this because I really don't know what degree of follow on yous want from this brief and im redecorating so time is in short supply.
+
+### 3. Add additional Rules:
+
+- This is assuming that it has been released to fulfill the business need, PM's/O's should be looking out for additional functionality customers might want added so we can expand our string validity detection logic
+
+### 4. Inject desired Rules via configuration file:
+- Through the addition of a JSON loader class we could enable customers to define what types of rules they want applied, this json could be loaded, the relevant rules will populate the validator dynamically then be used to determine string validity, allowing customers to customise their detection logic themselves
