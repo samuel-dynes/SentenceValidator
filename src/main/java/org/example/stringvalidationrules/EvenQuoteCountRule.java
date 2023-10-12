@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Class to validate if a string has an even number of quote characters
  */
-public class EvenQuoteCountValidator implements IStringValidationRule
+public class EvenQuoteCountRule implements IStringValidationRule
 {
 
    /**

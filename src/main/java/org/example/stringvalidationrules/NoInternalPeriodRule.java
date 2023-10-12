@@ -3,7 +3,7 @@ package org.example.stringvalidationrules;
 /**
  * Class to validate if a string has no internal periods/full stops
  */
-public class NoInternalPeriodValidator implements IStringValidationRule
+public class NoInternalPeriodRule implements IStringValidationRule
 {
 
    /**

@@ -3,7 +3,7 @@ package org.example.stringvalidationrules;
 /**
  * Class to validate that all numbers beneath 13 are spelled out
  */
-public class NumberLessThanThirteenValidator implements IStringValidationRule
+public class NumberLessThanThirteenRule implements IStringValidationRule
 {
    /**
     * Validates that all numbers in a string that are beneath 13 are spelled out

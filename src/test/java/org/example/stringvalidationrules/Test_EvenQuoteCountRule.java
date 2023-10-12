@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_EvenQuoteCountValidator
+class Test_EvenQuoteCountRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -32,5 +32,5 @@ class Test_EvenQuoteCountValidator
          Arguments.of(null, false)
          );
    }
-   private final EvenQuoteCountValidator m_validator = new EvenQuoteCountValidator();
+   private final EvenQuoteCountRule m_validator = new EvenQuoteCountRule();
 }

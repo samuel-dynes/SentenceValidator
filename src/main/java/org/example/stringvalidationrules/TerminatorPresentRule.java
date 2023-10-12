@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Class to validate that a String has a valid terminating character
  */
-public class TerminatorPresentValidator implements IStringValidationRule
+public class TerminatorPresentRule implements IStringValidationRule
 {
    /**
     * Validates that a String has a valid terminating character.

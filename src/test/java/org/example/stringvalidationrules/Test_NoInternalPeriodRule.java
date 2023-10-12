@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_NotNullOrEmptyValidator
+class Test_NoInternalPeriodRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -17,7 +17,7 @@ class Test_NotNullOrEmptyValidator
     */
    @ParameterizedTest
    @MethodSource("provideDataForTests")
-   void shouldCorrectlyEvaluateIfStringIsNotNullOrEmpty(String inputString, Boolean expectedResult)
+   void shouldCorrectlyEvaluateIfStringHasInternalPeriod(String inputString, Boolean expectedResult)
    {
       assertEquals(m_validator.isValid(inputString), expectedResult);
    }
@@ -25,10 +25,12 @@ class Test_NotNullOrEmptyValidator
    private static Stream<Arguments> provideDataForTests()
    {
       return Stream.of(
-         Arguments.of("", false),
-         Arguments.of(null, false),
-         Arguments.of("Example valid non null or empty string.", true)
+         Arguments.of("Example valid internal period string", true),
+         Arguments.of("Example in.valid internal period string", false),
+         Arguments.of("Example valid internal period string.", true),
+         Arguments.of("", true),
+         Arguments.of(null, false)
       );
    }
-   private final NotNullOrEmptyValidator m_validator = new NotNullOrEmptyValidator();
+   private final NoInternalPeriodRule m_validator = new NoInternalPeriodRule();
 }

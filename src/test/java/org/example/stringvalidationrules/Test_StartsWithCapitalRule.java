@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_NumberLessThanThirteenValidator
+class Test_StartsWithCapitalRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -17,7 +17,7 @@ class Test_NumberLessThanThirteenValidator
     */
    @ParameterizedTest
    @MethodSource("provideDataForTests")
-   void shouldCorrectlyEvaluateIfStringHasInvalidSpelledOutNumbers(String inputString, Boolean expectedResult)
+   void shouldCorrectlyEvaluateIfStringIsNotNullOrEmpty(String inputString, Boolean expectedResult)
    {
       assertEquals(m_validator.isValid(inputString), expectedResult);
    }
@@ -25,14 +25,14 @@ class Test_NumberLessThanThirteenValidator
    private static Stream<Arguments> provideDataForTests()
    {
       return Stream.of(
-         Arguments.of("Example one valid two spelled three out four numbers zero", true),
-         Arguments.of("Example invalid 0 non spelled out numbers", false),
-         Arguments.of("Example invalid 11 non 12 spelled out numbers", false),
-         Arguments.of("Example invalid -11 non -12 spelled out negative numbers", false),
-         Arguments.of("Example valid 13 non spelled out numbers", true),
-         Arguments.of("", true),
-         Arguments.of(null, false)
+         Arguments.of("V", true),
+         Arguments.of("Valid string capitalisation", true),
+         Arguments.of("iNvalid string capitalisation", false),
+         Arguments.of("", false),
+         Arguments.of(null, false),
+         Arguments.of("11 test numbers return false", false),
+         Arguments.of("% test symbols return false", false)
       );
    }
-   private final NumberLessThanThirteenValidator m_validator = new NumberLessThanThirteenValidator();
+   private final StartsWithCapitalRule m_validator = new StartsWithCapitalRule();
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_StartsWithCapitalValidator
+class Test_NotNullOrEmptyRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -25,14 +25,10 @@ class Test_StartsWithCapitalValidator
    private static Stream<Arguments> provideDataForTests()
    {
       return Stream.of(
-         Arguments.of("V", true),
-         Arguments.of("Valid string capitalisation", true),
-         Arguments.of("iNvalid string capitalisation", false),
          Arguments.of("", false),
          Arguments.of(null, false),
-         Arguments.of("11 test numbers return false", false),
-         Arguments.of("% test symbols return false", false)
+         Arguments.of("Example valid non null or empty string.", true)
       );
    }
-   private final StartsWithCapitalValidator m_validator = new StartsWithCapitalValidator();
+   private final NotNullOrEmptyRule m_validator = new NotNullOrEmptyRule();
 }

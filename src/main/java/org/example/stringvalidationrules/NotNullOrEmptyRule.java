@@ -3,7 +3,7 @@ package org.example.stringvalidationrules;
 /**
  * Class to validate if a string is not null or empty
  */
-public class NotNullOrEmptyValidator implements IStringValidationRule
+public class NotNullOrEmptyRule implements IStringValidationRule
 {
 
    /**

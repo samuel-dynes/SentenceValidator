@@ -3,7 +3,7 @@ package org.example.stringvalidationrules;
 /**
  * Class to validate that a String starts with a capital letter
  */
-public class StartsWithCapitalValidator implements IStringValidationRule
+public class StartsWithCapitalRule implements IStringValidationRule
 
 {
    /**

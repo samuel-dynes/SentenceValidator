@@ -2,12 +2,12 @@ package org.example.sentencevalidator;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.example.stringvalidationrules.EvenQuoteCountValidator;
-import org.example.stringvalidationrules.NoInternalPeriodValidator;
-import org.example.stringvalidationrules.NotNullOrEmptyValidator;
-import org.example.stringvalidationrules.NumberLessThanThirteenValidator;
-import org.example.stringvalidationrules.StartsWithCapitalValidator;
-import org.example.stringvalidationrules.TerminatorPresentValidator;
+import org.example.stringvalidationrules.EvenQuoteCountRule;
+import org.example.stringvalidationrules.NoInternalPeriodRule;
+import org.example.stringvalidationrules.NotNullOrEmptyRule;
+import org.example.stringvalidationrules.NumberLessThanThirteenRule;
+import org.example.stringvalidationrules.StartsWithCapitalRule;
+import org.example.stringvalidationrules.TerminatorPresentRule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,7 +19,7 @@ class Test_SentenceValidator
    @BeforeAll
    public static void initialiseMembers()
    {
-      briefCompliantSentenceValidator = new SentenceValidator(List.of(new NotNullOrEmptyValidator(), new EvenQuoteCountValidator(), new NoInternalPeriodValidator(), new NumberLessThanThirteenValidator(), new StartsWithCapitalValidator(), new TerminatorPresentValidator()));
+      briefCompliantSentenceValidator = new SentenceValidator(List.of(new NotNullOrEmptyRule(), new EvenQuoteCountRule(), new NoInternalPeriodRule(), new NumberLessThanThirteenRule(), new StartsWithCapitalRule(), new TerminatorPresentRule()));
    }
 
    @ParameterizedTest

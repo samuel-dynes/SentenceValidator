@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_NoInternalPeriodValidator
+class Test_TerminatorPresentRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -17,7 +17,7 @@ class Test_NoInternalPeriodValidator
     */
    @ParameterizedTest
    @MethodSource("provideDataForTests")
-   void shouldCorrectlyEvaluateIfStringHasInternalPeriod(String inputString, Boolean expectedResult)
+   void shouldCorrectlyEvaluateIfStringIsNotNullOrEmpty(String inputString, Boolean expectedResult)
    {
       assertEquals(m_validator.isValid(inputString), expectedResult);
    }
@@ -25,12 +25,15 @@ class Test_NoInternalPeriodValidator
    private static Stream<Arguments> provideDataForTests()
    {
       return Stream.of(
-         Arguments.of("Example valid internal period string", true),
-         Arguments.of("Example in.valid internal period string", false),
-         Arguments.of("Example valid internal period string.", true),
-         Arguments.of("", true),
+         Arguments.of(".", true),
+         Arguments.of("?", true),
+         Arguments.of("!", true),
+         Arguments.of("Valid string termination?!", true),
+         Arguments.of("invalid string termination_", false),
+         Arguments.of("invalid string termination!_", false),
+         Arguments.of("", false),
          Arguments.of(null, false)
       );
    }
-   private final NoInternalPeriodValidator m_validator = new NoInternalPeriodValidator();
+   private final TerminatorPresentRule m_validator = new TerminatorPresentRule();
 }

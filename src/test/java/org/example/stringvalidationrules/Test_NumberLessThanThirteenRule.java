@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Test_TerminatorPresentValidator
+class Test_NumberLessThanThirteenRule
 {
    /**
     * Parameterised test whose parameters are supplied by method provideDataForTests,
@@ -17,7 +17,7 @@ class Test_TerminatorPresentValidator
     */
    @ParameterizedTest
    @MethodSource("provideDataForTests")
-   void shouldCorrectlyEvaluateIfStringIsNotNullOrEmpty(String inputString, Boolean expectedResult)
+   void shouldCorrectlyEvaluateIfStringHasInvalidSpelledOutNumbers(String inputString, Boolean expectedResult)
    {
       assertEquals(m_validator.isValid(inputString), expectedResult);
    }
@@ -25,15 +25,14 @@ class Test_TerminatorPresentValidator
    private static Stream<Arguments> provideDataForTests()
    {
       return Stream.of(
-         Arguments.of(".", true),
-         Arguments.of("?", true),
-         Arguments.of("!", true),
-         Arguments.of("Valid string termination?!", true),
-         Arguments.of("invalid string termination_", false),
-         Arguments.of("invalid string termination!_", false),
-         Arguments.of("", false),
+         Arguments.of("Example one valid two spelled three out four numbers zero", true),
+         Arguments.of("Example invalid 0 non spelled out numbers", false),
+         Arguments.of("Example invalid 11 non 12 spelled out numbers", false),
+         Arguments.of("Example invalid -11 non -12 spelled out negative numbers", false),
+         Arguments.of("Example valid 13 non spelled out numbers", true),
+         Arguments.of("", true),
          Arguments.of(null, false)
       );
    }
-   private final TerminatorPresentValidator m_validator = new TerminatorPresentValidator();
+   private final NumberLessThanThirteenRule m_validator = new NumberLessThanThirteenRule();
 }
