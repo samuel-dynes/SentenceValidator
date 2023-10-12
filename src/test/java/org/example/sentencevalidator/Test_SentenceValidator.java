@@ -9,6 +9,7 @@ import org.example.stringvalidationrules.NumberLessThanThirteenRule;
 import org.example.stringvalidationrules.StartsWithCapitalRule;
 import org.example.stringvalidationrules.TerminatorPresentRule;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,16 +18,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Test_SentenceValidator
 {
    @BeforeAll
-   public static void initialiseMembers()
-   {
-      briefCompliantSentenceValidator = new SentenceValidator(List.of(new NotNullOrEmptyRule(), new EvenQuoteCountRule(), new NoInternalPeriodRule(), new NumberLessThanThirteenRule(), new StartsWithCapitalRule(), new TerminatorPresentRule()));
+   public static void initializeMembers() {
+      sentenceValidator = new SentenceValidator(List.of(
+         new NotNullOrEmptyRule(),
+         new EvenQuoteCountRule(),
+         new NoInternalPeriodRule(),
+         new NumberLessThanThirteenRule(),
+         new StartsWithCapitalRule(),
+         new TerminatorPresentRule()
+      ));
    }
 
    @ParameterizedTest
    @MethodSource("provideDataForBriefTests")
+   @DisplayName("Should correctly validate sentences")
    void shouldCorrectlyEvaluateTheBriefExamples(String inputString, Boolean expectedResult)
    {
-      assertEquals(briefCompliantSentenceValidator.isValidSentence(inputString), expectedResult);
+      assertEquals(expectedResult, sentenceValidator.isValidSentence(inputString));
    }
 
    private static Stream<Arguments> provideDataForBriefTests()
@@ -48,5 +56,5 @@ class Test_SentenceValidator
       );
    }
 
-   private static SentenceValidator briefCompliantSentenceValidator;
+   private static SentenceValidator sentenceValidator;
 }
