@@ -1,3 +1,5 @@
+name: Simple Java Dependency Analysis
+
 on: [push]
 
 jobs:
