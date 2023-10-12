@@ -39,3 +39,11 @@ different validation logic to take place, allowing for a more flexible solution 
 **Clarity and Readability**: The use of interfaces makes the code more self-documenting. Developers can quickly understand the purpose and requirements of each validation rule by looking at the interface definition, then unbserstand the specific implementation details by looking at the implementor. This improves code readability and collaboration among team members.
 
 **Extensibility**: When new validation rules are needed, we can create additional classes that implement the interface. This extensibility makes it straightforward to accommodate changing requirements without major code modifications.
+
+## CI
+Added a super basic CI workflow via github actions pretty much just ensures that everything compiles correctly and tests pass, would enforce a codeowners/minimum 1 review + force actions to pass before merging but locked behind enterprise accounts. WOuld also like to add a code coverage report as part of the CI via something like codecov but already used my trial, similar sentiment with code quality/static integration and sonarqube.
+
+## "plug into software that ships to customers"
+I wasnt 100% sure what this meant but I sort of guessed at 2 main use cases:
+1. The code will be imported as a dependency to another product and the code will be implemented there. (In this case there isnt anythnig special that needs done, the classes are available for import and use)
+2. We need to intergrate in with some kind of existing microservice architecture, which is why there is a simple restAPI and spring application present so if needed this could get spun up for use among existing automation/services
