@@ -19,7 +19,6 @@ public class NumberLessThanThirteenRule implements IStringValidationRule
     *
     * @param inputToBeValidated String to be validated
     * @return True if the string has no numbers beneath 13 that are not spelled out, False if not
-    * TODO: evaluate negative numbers correctly
     */
    @Override
    public boolean isValid(String inputToBeValidated)
