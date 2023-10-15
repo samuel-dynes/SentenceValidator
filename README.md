@@ -10,7 +10,7 @@ The SentenceValidator class takes a list of validation rules as a constructor pa
 **isValidSentence():** The primary method of the SentenceValidator class is isValidSentence(String inputToBeValidated). It takes an input sentence as a string and returns a boolean value indicating whether the sentence is valid according to the specified rules. It iterates through the list of validation rules and returns true if all rules pass, indicating a valid sentence. If any rule fails, the method returns false.
 
 ## Validation Rules
-The SentenceValidator relies on a set of validation rules to determine sentence validity. Each rule focuses on a specific aspect of a sentence, ensuring it meets certain criteria. Here are the rules used in the SentenceValidator:
+The SentenceValidator relies on a set of validation rules to determine sentence validity. Each rule focuses on a specific aspect of a sentence, ensuring it meets certain criteria. Here are the current rules that may be used in the SentenceValidator:
 
 ### 1. NotNullOrEmptyRule
    **Rule Objective:** This rule checks if the input sentence is not null and not empty.
